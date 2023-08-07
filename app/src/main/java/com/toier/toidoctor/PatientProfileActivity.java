@@ -16,9 +16,11 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.toier.toidoctor.controller.*;
+import com.toier.toidoctor.Controller.patientprofile;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class PatientProfileActivity extends AppCompatActivity {
     private Button button;
@@ -98,19 +100,11 @@ public class PatientProfileActivity extends AppCompatActivity {
                                                         Timestamp timestamp = (Timestamp) document.getData().get("birthday");
                                                         Date date = timestamp.toDate();
                                                         Log.d("ABC", String.valueOf(date.getDate()));
-                                                        if(UserController.getInstance().getRole().isPatient()) {
-                                                            if (document.getId().equals(user_id) && String.valueOf(document.getData().get("phoneNumber")).equals(UserController.getInstance().getPhoneNumber())) {
-                                                                setName(String.valueOf(document.getData().get("name")));
-                                                                setPhoneNumber(String.valueOf(document.getData().get("phoneNumber")));
-                                                                setButton(user_id);
-                                                            }
-                                                        }
-                                                        else {
-                                                            if (document.getId().equals(user_id)) {
-                                                                setName(String.valueOf(document.getData().get("name")));
-                                                                setPhoneNumber(String.valueOf(document.getData().get("phoneNumber")));
-                                                                setButton(user_id);
-                                                            }
+
+                                                        if(document.getId().equals(user_id)) {
+                                                            setName(String.valueOf(document.getData().get("name")));
+                                                            setPhoneNumber(String.valueOf(document.getData().get("phoneNumber")));
+                                                            setButton(user_id);
                                                         }
                                                     }
                                                 } else {
